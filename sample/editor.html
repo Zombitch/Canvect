@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Canvect</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+
+  <!-- Adding extra css -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="../css/materialize/materialize.min.css"  media="screen,projection"/>
+  <link type="text/css" rel="stylesheet" href="../css/materialize/materialize.custom.css"  media="screen,projection"/>
+
+  <!-- Adding Canvect JS -->
+  <script type="text/javascript" src="../js/canvect/canvectColor.js"></script>
+  <script type="text/javascript" src="../js/canvect/geoObjects/canvectObjectType.js"></script>
+  <script type="text/javascript" src="../js/canvect/geoObjects/canvectObject.js"></script>
+  <script type="text/javascript" src="../js/canvect/geoObjects/canvectPoint.js"></script>
+  <script type="text/javascript" src="../js/canvect/geoObjects/canvectRectangle.js"></script>
+  <script type="text/javascript" src="../js/canvect/geoObjects/canvectTriangle.js"></script>
+  <script type="text/javascript" src="../js/canvect/geoObjects/canvectPolygon.js"></script>
+  <script type="text/javascript" src="../js/canvect/geoObjects/canvectObjectList.js"></script>
+  <script type="text/javascript" src="../js/canvect/canvectEngine.js"></script>
+  <script type="text/javascript" src="../js/canvect/canvectManager.js"></script>
+  <script type="text/javascript" src="../js/canvect/canvectManagerEditor.js"></script>
+
+  <!-- Adding extra JS -->
+  <script type="text/javascript" src="../js/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="../js/materialize/materialize.min.js"></script>
+  <script type="text/javascript" src="../js/materialize/materializeInit.js"></script>
+  <script type="text/javascript" src="../js/init.js"></script>
+</head>
+
+<body>
+  <header>
+    <nav class="blue darken-1" role="navigation">
+      <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Canvect</a>
+        <ul class="left">
+          <li><a href="#" data-activates="slide-out" class="side-button">
+            <i class="material-icons">list</i>
+          </a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <ul id="slide-out" class="side-nav">
+      <li><a href="javascript:manager.clearCanvas();javascript:$('.button-collapse').sideNav('hide');"><i class="material-icons">insert_drive_file</i>New</a></li>
+      <li><a href="/cam"><i class="material-icons">save</i>Save</a></li>
+      <div class="divider"></div>
+      <li><a href="javascript:manager.canvasFillColor(CVColor.BLUE());javascript:$('.button-collapse').sideNav('hide');"><i class="material-icons">format_color_fill</i>Fill canvas</a></li>
+      <li><a href="javascript:manager.canvasStrokeColor(CVColor.BLUE());javascript:$('.button-collapse').sideNav('hide');"><i class="material-icons">border_color</i>Stroke canvas</a></li>
+      <div class="divider"></div>
+      <li><a href="javascript:$('.button-collapse').sideNav('hide');"><i class="material-icons">close</i>Fermer</a></li>
+    </ul>
+  </header>
+
+  <main>
+    <div class="section no-pad-bot white center" id="index-banner">
+
+      <div class="container">
+        <div class="row">
+          <canvas id="canVect" class="col col-no-padding s9"></canvas>
+          <div class="col s3">
+            <div id="canVectMenu" class="card blue darken-2">
+              <div class="card-content white-text">
+                <span class="card-title">Objects</span>
+                <a href="#addObjectModal" class="btn-floating blue darken-3 modal-trigger"><i class="material-icons">add</i></a>
+                <a href="javascript:manager.saveObject();" class="btn-floating blue darken-3"><i class="material-icons">save</i></a>
+                <a href="javascript:manager.closePolygonObject();" class="btn-floating blue darken-3"><i class="material-icons">gesture</i></a>
+                <ul id="objectContent">
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s3 offset-s3">
+            <div class="card blue darken-2">
+              <div class="card-content white-text">
+                <span class="card-title">Coordinates</span>
+                <div class="col s12">
+                  <p id="coordinates"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="page-footer blue darken-1">
+    <div class="container">
+      <div class="row">
+        <div class="col s12 l6">
+          <h5 class="white-text">T.H.O.R (c)</h5>
+          <p class="grey-text text-lighten-4">Since 2012</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      Powered by
+      <a class="white-text" href="http://materializecss.com">Materialize</a>,
+      <a class="white-text" href="https://jquery.com/">JQuery</a> and
+      <a class="white-text" href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API">HTML5 Canvas</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal Structure -->
+  <div id="addObjectModal" class="modal">
+    <div class="modal-content">
+      <h4>Start drawing object</h4>
+      <div class="row">
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s12">
+              <input placeholder="Object Name" id="objName" type="text" class="validate">
+              <label for="objName">Object Name</label>
+            </div>
+            <div class="input-field col s12">
+              <input placeholder="Object Color" id="objColor" type="text" class="validate" value="#000000">
+              <label for="objColor">Object Color</label>
+            </div>
+            <div class="input-field col s12">
+              <select id="objType">
+                <option value="" disabled selected>Object Type</option>
+                <option value="2">Point</option>
+                <option value="3">Rectangle</option>
+                <option value="4">Triangle</option>
+                <option value="5">Circle</option>
+                <option value="6">Polygon</option>
+              </select>
+              <label>Object Type</label>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="javascript:manager.createObject($('#objName').val(), $('#objType').val(), $('#objColor').val());" class="modal-action modal-close waves-effect waves-green btn blue darken-3">Start</a>
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn blue darken-3">Cancel</a>
+    </div>
+  </div>
+</body>
+</html>
