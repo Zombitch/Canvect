@@ -1,5 +1,9 @@
 function CVObjectType(){}
 
+CVObjectType.BASE_OBJECT = function(){
+    return -1;
+};
+
 CVObjectType.OBJECT = function(){
     return 1;
 };

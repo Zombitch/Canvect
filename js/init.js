@@ -17,4 +17,5 @@ function runEngine(){
   manager.canvasStrokeColor(CVColor.BLUE());
   manager.setCoordinateDisplay("coordinates");
   manager.addOnClickEvent(manager.clickEvent);
+  manager.addKeyboardEvent(manager.keyDownEvent, manager.keyUpEvent);
 }

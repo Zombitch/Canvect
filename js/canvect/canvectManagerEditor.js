@@ -121,7 +121,7 @@ function CVManagerEditor(){
   * @param y
   */
   this.clickEvent = function(x, y){
-    if(self.object != null){
+    if(self.object != null && self.clickMode == CVManager.MODE_CLICK()){
       var tmpObjList = self.objectList.slice();
 
       if(self.object.getType() == CVObjectType.POINT()){
@@ -137,11 +137,34 @@ function CVManagerEditor(){
       }else if(self.object.getType() == CVObjectType.OBJECT_LIST()){
 
       }
-
       tmpObjList.push(self.object);
 
       //Draw element on the canvas
       self.draw(tmpObjList);
+    }else if(self.clickMode == CVManager.MODE_TRANSLATE()){
+      
+    }
+  }
+
+  /**
+  * Key down event happened on canvas
+  * @param keyCode
+  */
+  this.keyDownEvent = function(keyCode){
+    // Shift Key
+    if(keyCode == 16){
+      self.clickMode = CVManager.MODE_TRANSLATE();
+    }
+  }
+
+  /**
+  * Key up event happened on canvas
+  * @param keyCode
+  */
+  this.keyUpEvent = function(keyCode){
+    // Shift Key
+    if(keyCode == 16){
+      self.clickMode = CVManager.MODE_CLICK();
     }
   }
 }

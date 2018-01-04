@@ -1,11 +1,11 @@
 function CVObject(){
   var self = this;
-  this.attributes = null;
   this.name = null;
-  this.type = null;
   this.strokeColor = null;
   this.fillColor = null;
   this.show = null;
+
+  CVBaseObject.call(this);
 
   /**
   *  Default initializer that instanciate the attributes
@@ -14,14 +14,6 @@ function CVObject(){
     this.attributes = Object.create(null);
     this.type = CVObjectType.OBJECT();
     this.show = true;
-  }
-
-  /**
-  * Get object type
-  * @return type
-  */
-  this.getType = function(){
-    return this.type;
   }
 
   /**
@@ -87,29 +79,7 @@ function CVObject(){
   this.getFillColor = function(){
     return this.fillColor;
   }
-
-  /**
-  * Get object name
-  * @return name
-  */
-  this.getAttributes = function(){
-    return this.attributes;
-  }
-
-  /**
-  * Add a value to the attributes object
-  * @param att Attribute name to add
-  * @param value Attribute value to add
-  */
-  this.addAttributes = function(att, value){
-    this.attributes[att] = value;
-  }
-
-  /**
-  * Remove a value of the attributes object
-  * @param att Attribute name to remove
-  */
-  this.removeAttributes = function(att){
-    delete this.attributes[att];
-  }
 }
+
+CVObject.prototype = new CVBaseObject();
+CVObject.prototype.constructor = CVObject;
