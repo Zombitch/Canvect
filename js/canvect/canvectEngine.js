@@ -2,6 +2,7 @@ function CVEngine(){
   var self = this;
   this.canvas = null;
   this.context = null;
+  this.translateFactor = null;
 
   /**
   * Initialize canvect engine, retreiving canvas context.
@@ -11,6 +12,9 @@ function CVEngine(){
     this.canvas = document.getElementById(canvasId);
     this.context = this.canvas.getContext("2d");
     this.setCanvasSize(this.canvas.offsetWidth, this.canvas.offsetHeight);
+
+    this.translateFactor = new CVTransformFactor();
+    this.translateFactor.init();
   }
 
   /**
@@ -19,6 +23,22 @@ function CVEngine(){
   */
   this.getCanvas = function(){
     return this.canvas;
+  }
+
+  /**
+  * Get current canvas context
+  * @return canvas context
+  */
+  this.getContext = function(){
+    return this.context;
+  }
+
+  /**
+  * Get translate factor
+  * @return translate factor
+  */
+  this.getTranslateFactor = function(){
+    return this.translateFactor;
   }
 
   /**
@@ -36,8 +56,10 @@ function CVEngine(){
   * @param color Filling color
   */
   this.fillCanvas = function(color){
+    var translateFactorValue = this.translateFactor.getValue();
+    var translateFactorValueTmp = this.translateFactor.getTmpValue();
     this.context.fillStyle = color;
-    this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    this.context.fillRect(-translateFactorValue.getX()-translateFactorValueTmp.getX(), -translateFactorValue.getY()-translateFactorValueTmp.getY(), this.canvas.width, this.canvas.height);
   }
 
   /**
@@ -45,8 +67,11 @@ function CVEngine(){
   * @param color Stroking color
   */
   this.strokeCanvas = function(color){
+    var translateFactorValue = this.translateFactor.getValue();
+    var translateFactorValueTmp = this.translateFactor.getTmpValue();
+    console.log(translateFactorValue);
     this.context.strokeStyle = color;
-    this.context.strokeRect(0, 0, this.canvas.width, this.canvas.height);
+    this.context.strokeRect(-translateFactorValue.getX()-translateFactorValueTmp.getX(), -translateFactorValue.getY()-translateFactorValueTmp.getY(), this.canvas.width, this.canvas.height);
   }
 
   /**

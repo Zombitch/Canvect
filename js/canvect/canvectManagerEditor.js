@@ -108,8 +108,17 @@ function CVManagerEditor(){
     return this.objectList;
   }
 
+  /**
+  * Draw elements on canvas
+  * @param objects The objects to draw in canvas
+  */
   this.draw = function(objects){
+    var translate = this.engine.getTranslateFactor().getValue();
+    var translateTmp = this.engine.getTranslateFactor().getTmpValue();
+    this.engine.getContext().resetTransform();
     this.engine.clearCanvas();
+    this.engine.getContext().translate(translate.getX() + translateTmp.getX(), translate.getY() + translateTmp.getY());
+
     if(this.debugFillColor != null) this.canvasFillColor(this.debugFillColor);
     if(this.debugStrokeColor != null) this.canvasStrokeColor(this.debugStrokeColor);
     this.engine.draw(objects, true);
@@ -120,8 +129,8 @@ function CVManagerEditor(){
   * @param x
   * @param y
   */
-  this.clickEvent = function(x, y){
-    if(self.object != null && self.clickMode == CVManager.MODE_CLICK()){
+  this.clickEvent = function(x, y, evt){
+    if(self.object != null && !evt.shiftKey){
       var tmpObjList = self.objectList.slice();
 
       if(self.object.getType() == CVObjectType.POINT()){
@@ -141,30 +150,6 @@ function CVManagerEditor(){
 
       //Draw element on the canvas
       self.draw(tmpObjList);
-    }else if(self.clickMode == CVManager.MODE_TRANSLATE()){
-      
-    }
-  }
-
-  /**
-  * Key down event happened on canvas
-  * @param keyCode
-  */
-  this.keyDownEvent = function(keyCode){
-    // Shift Key
-    if(keyCode == 16){
-      self.clickMode = CVManager.MODE_TRANSLATE();
-    }
-  }
-
-  /**
-  * Key up event happened on canvas
-  * @param keyCode
-  */
-  this.keyUpEvent = function(keyCode){
-    // Shift Key
-    if(keyCode == 16){
-      self.clickMode = CVManager.MODE_CLICK();
     }
   }
 }

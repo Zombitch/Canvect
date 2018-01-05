@@ -16,6 +16,8 @@ function runEngine(){
   manager.init(engine);
   manager.canvasStrokeColor(CVColor.BLUE());
   manager.setCoordinateDisplay("coordinates");
+  manager.addOnMouseDownEvent(manager.mouseDownEvent);
+  manager.addOnMouseUpEvent(manager.mouseUpEvent);
   manager.addOnClickEvent(manager.clickEvent);
-  manager.addKeyboardEvent(manager.keyDownEvent, manager.keyUpEvent);
+  manager.addOnMouseMouveEvent(manager.mouseMoveEvent);
 }
