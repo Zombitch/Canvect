@@ -69,7 +69,6 @@ function CVEngine(){
   this.strokeCanvas = function(color){
     var translateFactorValue = this.translateFactor.getValue();
     var translateFactorValueTmp = this.translateFactor.getTmpValue();
-    console.log(translateFactorValue);
     this.context.strokeStyle = color;
     this.context.strokeRect(-translateFactorValue.getX()-translateFactorValueTmp.getX(), -translateFactorValue.getY()-translateFactorValueTmp.getY(), this.canvas.width, this.canvas.height);
   }
