@@ -3,6 +3,7 @@ function CVManager(){
   this.engine = null;
   this.clickMode = null;
   this.isMouseDown = null;
+  this.objectList = null; //Contains all type of CVObject possible
 
   this.baseInit = function(engine){
     this.engine = engine;
@@ -136,6 +137,14 @@ function CVManager(){
       self.engine.getTranslateFactor().setTmpValue(x - translateFactorTmp.getX(), y - translateFactorTmp.getY());
       self.draw(self.objectList);
     }
+  }
+
+  /**
+  * Download canvect data objects stored in engine memory
+  */
+  this.downloadData = function(){
+    uriContent = "data:application/octet-stream," + encodeURIComponent(JSON.stringify(this.objectList));
+    window.open(uriContent, "test");
   }
 };
 

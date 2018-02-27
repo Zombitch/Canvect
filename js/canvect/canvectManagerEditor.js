@@ -2,9 +2,7 @@ function CVManagerEditor(){
   var self = this;
   this.debugFillColor = null;
   this.debugStrokeColor = null;
-  this.objectList = null; //Contains all type of CVObject possible
   this.object = null; //Current object drawing and editing
-  this.engine = null;
 
   CVManager.call(this);
 

@@ -50,7 +50,7 @@
 
     <ul id="slide-out" class="side-nav">
       <li><a href="javascript:manager.clearCanvas();javascript:$('.button-collapse').sideNav('hide');"><i class="material-icons">insert_drive_file</i>New</a></li>
-      <li><a href="/cam"><i class="material-icons">save</i>Save</a></li>
+      <li><a href="javascript:manager.downloadData();"><i class="material-icons">save</i>Save</a></li>
       <div class="divider"></div>
       <li><a href="javascript:manager.canvasFillColor(CVColor.BLUE());javascript:$('.button-collapse').sideNav('hide');"><i class="material-icons">format_color_fill</i>Fill canvas</a></li>
       <li><a href="javascript:manager.canvasStrokeColor(CVColor.BLUE());javascript:$('.button-collapse').sideNav('hide');"><i class="material-icons">border_color</i>Stroke canvas</a></li>
@@ -80,7 +80,7 @@
         </div>
 
         <div class="row">
-          <div class="col s3 offset-s3">
+          <div class="col s4">
             <div class="card blue darken-2">
               <div class="card-content white-text">
                 <span class="card-title">Coordinates</span>
