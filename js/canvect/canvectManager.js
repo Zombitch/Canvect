@@ -25,11 +25,11 @@ function CVManager(){
   * @param redraw
   */
   this.removeObjectAtIndex = function(idx, redraw){
-    this.objectList = this.objectList.slice(idx);
+    this.objectList.splice(idx, 1);
 
     if(redraw === true){
       this.engine.clearCanvas();
-      this.engine.draw(this.objectList, false);
+      this.draw(this.objectList);
     }
   }
 
@@ -171,6 +171,21 @@ function CVManager(){
     uriContent = "data:application/octet-stream," + encodeURIComponent(JSON.stringify(this.objectList));
     window.open(uriContent, "test");
   }
+
+  /**
+  * Draw elements on canvas
+  * @param objects The objects to draw in canvas
+  */
+  this.draw = function(objects){
+    var translate = this.engine.getTranslateFactor().getValue();
+    var translateTmp = this.engine.getTranslateFactor().getTmpValue();
+    this.engine.getContext().resetTransform();
+    this.engine.clearCanvas();
+    this.engine.getContext().translate(translate.getX() + translateTmp.getX(), translate.getY() + translateTmp.getY());
+
+    this.engine.draw(objects, false);
+  }
+
 };
 
 CVManager.MODE_CLICK = function(){

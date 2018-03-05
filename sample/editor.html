@@ -64,16 +64,43 @@
 
       <div class="container">
         <div class="row">
-          <canvas id="canVect" class="col col-no-padding s9"></canvas>
-          <div class="col s3">
-            <div id="canVectMenu" class="card blue darken-2">
-              <div class="card-content white-text">
-                <span class="card-title">Objects</span>
-                <a href="#addObjectModal" class="btn-floating blue darken-3 modal-trigger"><i class="material-icons">add</i></a>
-                <a href="javascript:manager.saveObject();" class="btn-floating blue darken-3"><i class="material-icons">save</i></a>
-                <a href="javascript:manager.closePolygonObject();" class="btn-floating blue darken-3"><i class="material-icons">gesture</i></a>
-                <ul id="objectContent">
-                </ul>
+          <canvas id="canVect" class="col col-no-padding s8"></canvas>
+          <div class="col s4">
+            <div id="canVectMenu" class="blue darken-2">
+              <div class=" white-text">
+                <h5>Objects</h5>
+                <div class="container">
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input placeholder="Object Name" id="objName" type="text" class="validate">
+                      <label for="objName">Object Name</label>
+                    </div>
+                    <div class="input-field col s12">
+                      <input placeholder="Object Color" id="objColor" type="text" class="validate" value="#000000">
+                      <label for="objColor">Object Color</label>
+                    </div>
+                    <div class="input-field col s12">
+                      <select id="objType">
+                        <option value="" disabled selected>Object Type</option>
+                        <option value="2">Point</option>
+                        <option value="3">Rectangle</option>
+                        <option value="4">Triangle</option>
+                        <option value="5">Circle</option>
+                        <option value="6">Polygon</option>
+                      </select>
+                      <label>Object Type</label>
+                    </div>
+                    <div class="input-field col s12">
+                      <input placeholder="Attributes" id="objAttributes" type="text" class="validate">
+                      <label for="objAttributes">Attributes</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <a href="javascript:manager.createObject($('#objName').val(), $('#objType').val(), $('#objColor').val(), $('#objAttributes').val());" class="btn-floating blue darken-3"><i class="material-icons">add</i></a>
+                    <a href="javascript:manager.saveObject();" class="btn-floating blue darken-3"><i class="material-icons">save</i></a>
+                    <a href="javascript:manager.closePolygonObject();" class="btn-floating blue darken-3"><i class="material-icons">gesture</i></a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -91,8 +118,8 @@
             </div>
           </div>
           <div class="col s3">
-            <div class="card waves-effect waves-light btn-large btn blue darken-2">
-              <a class="white-text" href="javascript:showObjectList();"><i class="material-icons left">format_list_bulleted</i>SHOW OBJECT LIST</a>
+            <div onclick="javascript:showObjectList();" class="card waves-effect waves-light btn-large btn blue darken-2">
+              <a class="white-text"><i class="material-icons left">format_list_bulleted</i>SHOW OBJECT LIST</a>
             </div>
           </div>
         </div>
@@ -120,46 +147,6 @@
   </footer>
 
   <!-- Modal Structure -->
-  <div id="addObjectModal" class="modal">
-    <div class="modal-content">
-      <h4>Start drawing object</h4>
-      <div class="row">
-        <form class="col s12">
-          <div class="row">
-            <div class="input-field col s12">
-              <input placeholder="Object Name" id="objName" type="text" class="validate">
-              <label for="objName">Object Name</label>
-            </div>
-            <div class="input-field col s12">
-              <input placeholder="Object Color" id="objColor" type="text" class="validate" value="#000000">
-              <label for="objColor">Object Color</label>
-            </div>
-            <div class="input-field col s12">
-              <select id="objType">
-                <option value="" disabled selected>Object Type</option>
-                <option value="2">Point</option>
-                <option value="3">Rectangle</option>
-                <option value="4">Triangle</option>
-                <option value="5">Circle</option>
-                <option value="6">Polygon</option>
-              </select>
-              <label>Object Type</label>
-            </div>
-            <div class="input-field col s12">
-              <input placeholder="Attributes" id="objAttributes" type="text" class="validate">
-              <label for="objAttributes">Attributes</label>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <a href="javascript:manager.createObject($('#objName').val(), $('#objType').val(), $('#objColor').val(), $('#objAttributes').val());" class="modal-action modal-close waves-effect waves-green btn blue darken-3">Start</a>
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn blue darken-3">Cancel</a>
-    </div>
-  </div>
-
-
   <div id="showObjectModal" class="modal">
     <div class="modal-content">
       <h4>Object list</h4>

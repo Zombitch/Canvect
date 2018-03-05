@@ -25,7 +25,9 @@ function runEngine(){
 function showObjectList(){
   $("#objectCollection").html("");
   manager.getObjectList().forEach(function(element, index){
-    $("#objectCollection").append('<li class="collection-item dismissable"><div>'+element.getName()+'<a href="javascript:closeObjectModal();javascript:manager.removeObjectAtIndex('+index+1+', true);" class="secondary-content"><i class="material-icons blue-text">delete</i></a></div></li>');
+    var elName = element.getName();
+    if(elName.length == 0) elName = "Unknown";
+    $("#objectCollection").append('<li class="collection-item"><div>'+elName+'<a href="javascript:closeObjectModal();javascript:manager.removeObjectAtIndex('+index+', true);" class="secondary-content"><i class="material-icons blue-text">delete</i></a></div></li>');
   });
 
   $("#showObjectModal").modal('open');
