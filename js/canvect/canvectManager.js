@@ -11,6 +11,31 @@ function CVManager(){
     this.clickMode = CVManager.MODE_CLICK();
   }
 
+  /**
+  * Get the object list
+  * @return array
+  */
+  this.getObjectList = function(){
+    return this.objectList;
+  }
+
+  /**
+  * Remove object from array LIST
+  * @param idx
+  * @param redraw
+  */
+  this.removeObjectAtIndex = function(idx, redraw){
+    this.objectList = this.objectList.slice(idx);
+
+    if(redraw === true){
+      this.engine.clearCanvas();
+      this.engine.draw(this.objectList, false);
+    }
+  }
+
+  /**
+  * Compute coordinate based on mouse position
+  */
   this.computeCoordinates = function(evt){
     var rect = this.engine.getCanvas().getBoundingClientRect();
     var xValue = Math.round(evt.clientX - rect.left) - this.engine.getTranslateFactor().getValue().getX();

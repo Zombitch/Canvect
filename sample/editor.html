@@ -90,6 +90,11 @@
               </div>
             </div>
           </div>
+          <div class="col s3">
+            <div class="card waves-effect waves-light btn-large btn blue darken-2">
+              <a class="white-text" href="javascript:showObjectList();"><i class="material-icons left">format_list_bulleted</i>SHOW OBJECT LIST</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -99,7 +104,7 @@
     <div class="container">
       <div class="row">
         <div class="col s12 l6">
-          <h5 class="white-text">T.H.O.R (c)</h5>
+          <h5 class="white-text">CanVect (c)</h5>
           <p class="grey-text text-lighten-4">Since 2012</p>
         </div>
       </div>
@@ -140,13 +145,31 @@
               </select>
               <label>Object Type</label>
             </div>
+            <div class="input-field col s12">
+              <input placeholder="Attributes" id="objAttributes" type="text" class="validate">
+              <label for="objAttributes">Attributes</label>
+            </div>
           </div>
         </form>
       </div>
     </div>
     <div class="modal-footer">
-      <a href="javascript:manager.createObject($('#objName').val(), $('#objType').val(), $('#objColor').val());" class="modal-action modal-close waves-effect waves-green btn blue darken-3">Start</a>
+      <a href="javascript:manager.createObject($('#objName').val(), $('#objType').val(), $('#objColor').val(), $('#objAttributes').val());" class="modal-action modal-close waves-effect waves-green btn blue darken-3">Start</a>
       <a href="#!" class="modal-action modal-close waves-effect waves-green btn blue darken-3">Cancel</a>
+    </div>
+  </div>
+
+
+  <div id="showObjectModal" class="modal">
+    <div class="modal-content">
+      <h4>Object list</h4>
+      <div class="row">
+        <ul id="objectCollection" class="collection">
+        </ul>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn blue darken-3">Close</a>
     </div>
   </div>
 </body>

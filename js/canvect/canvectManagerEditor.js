@@ -35,7 +35,7 @@ function CVManagerEditor(){
   }
 
   /**
-  * Stroke the canvas with a color
+  * Clear canvas and object in memory
   * @param color
   */
   this.clearCanvas = function(){
@@ -49,7 +49,7 @@ function CVManagerEditor(){
   /**
   * Create the object that will be created
   */
-  this.createObject = function(objName, objType, objColor){
+  this.createObject = function(objName, objType, objColor, attributes){
     if(objType == CVObjectType.POINT()){
       this.object = new CVPoint();
     }else if(objType == CVObjectType.RECTANGLE()){
@@ -66,6 +66,10 @@ function CVManagerEditor(){
     this.object.init();
     this.object.setStrokeColor(objColor);
     this.object.setName(objName);
+
+    if(typeof attributes !== "undefined" && attributes.length > 0){
+      this.object.setAttributes(JSON.parse(attributes));
+    }
   }
 
   /**
@@ -96,14 +100,6 @@ function CVManagerEditor(){
   */
   this.getObject = function(){
     return this.object;
-  }
-
-  /**
-  * Get the object list
-  * @return array
-  */
-  this.getObjectList = function(){
-    return this.objectList;
   }
 
   /**

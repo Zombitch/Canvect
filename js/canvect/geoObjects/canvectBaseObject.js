@@ -20,11 +20,18 @@ function CVBaseObject(){
   }
 
   /**
-  * Get object name
-  * @return name
+  * Get object attributes
   */
   this.getAttributes = function(){
     return this.attributes;
+  }
+
+  /**
+  * Set object attributes
+  * @return attr
+  */
+  this.setAttributes = function(attr){
+    this.attributes = attr;
   }
 
   /**
