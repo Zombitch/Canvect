@@ -4,7 +4,7 @@ function CVImage(){
   this.image = null;
   this.isImageLoaded = false;
 
-  CVObject.call(this);
+  CVPoint.call(this);
 
   /**
   *  Default initializer that instanciate the attributes
@@ -67,10 +67,10 @@ function CVImage(){
   */
   this.draw = function(ctx){
     if(this.isImageLoaded == true){
-      ctx.drawImage(this.image,10,10);
+      ctx.drawImage(this.image, this.x, this.y);
     }
   }
 }
 
-CVImage.prototype = new CVObject();
+CVImage.prototype = new CVPoint();
 CVImage.prototype.constructor = CVImage;

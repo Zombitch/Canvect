@@ -134,7 +134,8 @@ function CVManagerEditor(){
     if(self.object != null && !evt.shiftKey){
       var tmpObjList = self.objectList.slice();
 
-      if(self.object.getType() == CVObjectType.POINT()){
+      if(self.object.getType() == CVObjectType.POINT() ||
+         self.object.getType() == CVObjectType.IMAGE()){
         self.object.setXY(x, y);
       }else if(self.object.getType() == CVObjectType.RECTANGLE()){
         if(self.object.getX() == null || self.object.getY() == null) self.object.setXY(x, y);
