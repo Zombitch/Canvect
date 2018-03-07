@@ -31,3 +31,7 @@ CVObjectType.POLYGON = function(){
 CVObjectType.OBJECT_LIST = function(){
     return 7;
 };
+
+CVObjectType.IMAGE = function(){
+    return 8;
+};

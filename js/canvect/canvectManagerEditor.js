@@ -49,7 +49,7 @@ function CVManagerEditor(){
   /**
   * Create the object that will be created
   */
-  this.createObject = function(objName, objType, objColor, attributes){
+  this.createObject = function(objName, objType, objColor, attributes, imgFile){
     if(objType == CVObjectType.POINT()){
       this.object = new CVPoint();
     }else if(objType == CVObjectType.RECTANGLE()){
@@ -59,13 +59,20 @@ function CVManagerEditor(){
     }else if(objType == CVObjectType.CIRCLE()){
     }else if(objType == CVObjectType.POLYGON()){
       this.object = new CVPolygon();
-    }else if(objType == CVObjectType.POLYGON_LIST()){
+    }else if(objType == CVObjectType.OBJECT_LIST()){
       this.object = new CVPolygonList();
+    }else if(objType == CVObjectType.IMAGE()){
+      this.object = new CVImage();
     }
 
     this.object.init();
     this.object.setStrokeColor(objColor);
     this.object.setName(objName);
+
+    //Custom initialization
+    if(objType == CVObjectType.IMAGE()){
+      this.object.loadImage(imgFile);
+    }
 
     if(typeof attributes !== "undefined" && attributes.length > 0){
       this.object.setAttributes(JSON.parse(attributes));

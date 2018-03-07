@@ -7,8 +7,12 @@ var manager = null;
 $(document).ready(function(){
   MaterializeCustomInit();
   runEngine();
+  initListeners();
 });
 
+/**
+* Run Canvect Engine
+*/
 function runEngine(){
   engine = new CVEngine();
   manager = new CVManagerEditor();
@@ -22,6 +26,9 @@ function runEngine(){
   manager.addOnMouseMouveEvent(manager.mouseMoveEvent);
 }
 
+/**
+* Show dialog containing all drawing object
+*/
 function showObjectList(){
   $("#objectCollection").html("");
   manager.getObjectList().forEach(function(element, index){
@@ -35,4 +42,19 @@ function showObjectList(){
 
 function closeObjectModal(){
   $("#showObjectModal").modal("close");
+}
+
+/**
+* Init all listeners / triggers
+*/
+function initListeners(){
+  $("#objType").change(function(){
+    var selectedValue = $(this).val();
+
+    if(selectedValue == 8){
+      $("#objImageContainer").removeClass("hide");
+    }else{
+      $("#objImageContainer").addClass("hide");
+    }
+  });
 }

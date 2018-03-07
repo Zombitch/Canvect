@@ -19,6 +19,7 @@
   <script type="text/javascript" src="../js/canvect/geoObjects/canvectRectangle.js"></script>
   <script type="text/javascript" src="../js/canvect/geoObjects/canvectPolygon.js"></script>
   <script type="text/javascript" src="../js/canvect/geoObjects/canvectTriangle.js"></script>
+  <script type="text/javascript" src="../js/canvect/geoObjects/canvectImage.js"></script>
   <script type="text/javascript" src="../js/canvect/geoObjects/canvectObjectList.js"></script>
   <script type="text/javascript" src="../js/canvect/geoTransform/canvectTransformPoint.js"></script>
   <script type="text/javascript" src="../js/canvect/geoTransform/canvectTransformFactor.js"></script>
@@ -35,28 +36,54 @@
 
 <body>
   <header>
-    <nav class="blue darken-1" role="navigation">
-      <ul class="left">
-        <li>
-          <a href="#" data-activates="slide-out" class="side-button">
-          <input type="hidden" href="#" data-activates="nav-right" class="side-button-right-hidden"/>
-          <i class="material-icons">list</i>
-          </a>
-        </li>
-      </ul>
+    <div class="navbar-fixed">
+      <nav>
+        <div class="nav-wrapper blue darken-2">
+          <ul class="right">
+            <li><a href="javascript:manager.clearCanvas();"><i class="material-icons">insert_drive_file</i></a></li>
+            <li><a href="javascript:manager.downloadData();"><i class="material-icons">save</i></a></li>
+            <li><a href="javascript:showObjectList();" class="white-text"><i class="material-icons white-text">format_list_bulleted</i></a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
 
-      <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Canvect</a>
-      </div>
-    </nav>
-
-    <ul id="slide-out" class="side-nav">
-      <li><a href="javascript:manager.clearCanvas();javascript:$('.button-collapse').sideNav('hide');"><i class="material-icons">insert_drive_file</i>New</a></li>
-      <li><a href="javascript:manager.downloadData();"><i class="material-icons">save</i>Save</a></li>
-      <div class="divider"></div>
-      <li><a href="javascript:manager.canvasFillColor(CVColor.BLUE());javascript:$('.button-collapse').sideNav('hide');"><i class="material-icons">format_color_fill</i>Fill canvas</a></li>
-      <li><a href="javascript:manager.canvasStrokeColor(CVColor.BLUE());javascript:$('.button-collapse').sideNav('hide');"><i class="material-icons">border_color</i>Stroke canvas</a></li>
-      <div class="divider"></div>
-      <li><a href="javascript:$('.button-collapse').sideNav('hide');"><i class="material-icons">close</i>Fermer</a></li>
+    <ul id="slide-out" class="side-nav fixed blue darken-2">
+      <li class="white-text center border-bottom-white">
+        <h4>Canvect</h4>
+      </li>
+      <li>
+        <input placeholder="Object Name" id="objName" type="text" class="white-text">
+      </li>
+      <li>
+        <input placeholder="Object Color" id="objColor" type="text" class="white-text" value="#000000">
+      </li>
+      <li>
+        <select id="objType" class="white-text">
+          <option value="" disabled selected>Object Type</option>
+          <option class="red" value="2">Point</option>
+          <option value="3">Rectangle</option>
+          <option value="4">Triangle</option>
+          <option value="5">Circle</option>
+          <option value="6">Polygon</option>
+          <option value="8">Image</option>
+        </select>
+      </li>
+      <li class="hide white-text" id="objImageContainer">
+        <input type="text" id="objImage" value="C:\Users\Navsii\Pictures\facturation.png"/>
+      </li>
+      <li>
+        <input placeholder="Attributes" id="objAttributes" type="text" class="validate">
+      </li>
+      <li>
+        <a href="javascript:manager.createObject($('#objName').val(), $('#objType').val(), $('#objColor').val(), $('#objAttributes').val(), $('#objImage').val());" class="white-text"><i class="material-icons white-text">gesture</i>Start</a>
+      </li>
+      <li>
+        <a href="javascript:manager.closePolygonObject();" class="white-text"><i class="material-icons white-text">timeline</i>Finalize/Close Polygon</a>
+      </li>
+      <li class="border-bottom-white">
+        <a href="javascript:manager.saveObject();" class="white-text"><i class="material-icons white-text">save</i>Persist</a>
+      </li>
     </ul>
   </header>
 
@@ -64,62 +91,19 @@
     <div class="section no-pad-bot white center" id="index-banner">
       <div class="container">
         <div class="row">
-          <canvas id="canVect" class="col col-no-padding s8"></canvas>
-          <div class="col s4">
-            <div id="canVectMenu" class="blue darken-2">
-              <div class=" white-text">
-                <h5>Objects</h5>
-                <div class="container">
-                  <div class="row">
-                    <div class="input-field col s12">
-                      <input placeholder="Object Name" id="objName" type="text" class="validate">
-                      <label for="objName">Object Name</label>
-                    </div>
-                    <div class="input-field col s12">
-                      <input placeholder="Object Color" id="objColor" type="text" class="validate" value="#000000">
-                      <label for="objColor">Object Color</label>
-                    </div>
-                    <div class="input-field col s12">
-                      <select id="objType">
-                        <option value="" disabled selected>Object Type</option>
-                        <option value="2">Point</option>
-                        <option value="3">Rectangle</option>
-                        <option value="4">Triangle</option>
-                        <option value="5">Circle</option>
-                        <option value="6">Polygon</option>
-                      </select>
-                      <label>Object Type</label>
-                    </div>
-                    <div class="input-field col s12">
-                      <input placeholder="Attributes" id="objAttributes" type="text" class="validate">
-                      <label for="objAttributes">Attributes</label>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <a href="javascript:manager.createObject($('#objName').val(), $('#objType').val(), $('#objColor').val(), $('#objAttributes').val());" class="btn-floating blue darken-3"><i class="material-icons">add</i></a>
-                    <a href="javascript:manager.saveObject();" class="btn-floating blue darken-3"><i class="material-icons">save</i></a>
-                    <a href="javascript:manager.closePolygonObject();" class="btn-floating blue darken-3"><i class="material-icons">gesture</i></a>
+          <div class="col s12">
+            <canvas id="canVect" class="col col-no-padding s12"></canvas>
+          </div>
+          <div class="col s12">
+            <div class="col s12">
+              <div class="card blue darken-2">
+                <div class="card-content white-text">
+                  <span class="card-title">Coordinates</span>
+                  <div class="col s12">
+                    <p id="coordinates"></p>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col s4">
-            <div class="card blue darken-2">
-              <div class="card-content white-text">
-                <span class="card-title">Coordinates</span>
-                <div class="col s12">
-                  <p id="coordinates"></p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col s3">
-            <div onclick="javascript:showObjectList();" class="card waves-effect waves-light btn-large btn blue darken-2">
-              <a class="white-text"><i class="material-icons left">format_list_bulleted</i>SHOW OBJECT LIST</a>
             </div>
           </div>
         </div>
