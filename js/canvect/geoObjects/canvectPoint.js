@@ -60,6 +60,15 @@ function CVPoint(){
   }
 
   /**
+  * Check if a point is insde the rectangle or not
+  * @param x X point to check
+  * @param y Y point to check
+  */
+  this.isPointInside = function(x, y){
+    return (x == this.x && y == this.y);
+  }
+
+  /**
   * Draw the CVPoint on the canvas
   * @param ctx Canvas context
   */

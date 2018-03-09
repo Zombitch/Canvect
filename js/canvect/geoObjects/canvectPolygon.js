@@ -51,6 +51,19 @@ function CVPolygon(){
   }
 
   /**
+  * Check if a point is insde the polygon or not
+  * @param x X point to check
+  * @param y Y point to check
+  */
+  this.isPointInside = function(x, y){
+    for(var isIn = false, i = -1, l = this.points.length, j = l - 1; ++i < l; j = i)
+        ((this.points[i].getY() <= y && y < this.points[j].getY()) || (this.points[j].getY() <= y && y < this.points[i].getY()))
+        && (x < (this.points[j].getX() - this.points[i].getX()) * (y - this.points[i].getY()) / (this.points[j].getY() - this.points[i].getY()) + this.points[i].getX())
+        && (isIn = !isIn);
+    return isIn;
+  }
+
+  /**
   * Draw partial CVPolygon on the canvas.
   * This means the system will try to draw something with available data even if all data are not set.
   * For instance, if the polygon does not specify third point, then it will display a line.

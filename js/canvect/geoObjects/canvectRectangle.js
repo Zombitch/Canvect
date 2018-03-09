@@ -110,6 +110,15 @@ function CVRectangle(){
   }
 
   /**
+  * Check if a point is insde the rectangle or not
+  * @param x X point to check
+  * @param y Y point to check
+  */
+  this.isPointInside = function(x, y){
+    return (x >= this.x && y >= this.y && x <= this.x+this.width &&  y <= this.y+this.height);
+  }
+
+  /**
   * Draw partial CVRectangle on the canvas.
   * This means the system will try to draw something with available data even if all data are not set.
   * For instance, if the rectangle does not specify width or height, then it will display a point

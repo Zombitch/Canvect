@@ -54,6 +54,15 @@ function CVImage(){
   }
 
   /**
+  * Check if a point is insde the rectangle or not
+  * @param x X point to check
+  * @param y Y point to check
+  */
+  this.isPointInside = function(x, y){
+    return (x >= this.x && y >= this.y && x <= this.x+this.image.width &&  y <= this.y+this.image.height);
+  }
+
+  /**
   * Draw partial CVImage on the canvas.
   * @param ctx Canvas context
   */

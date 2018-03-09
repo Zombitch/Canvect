@@ -152,6 +152,10 @@ function CVManagerEditor(){
 
       //Draw element on the canvas
       self.draw(tmpObjList);
+    }else{
+      self.objectList.forEach(function(element){
+        console.log(element.isPointInside(x, y));
+      });
     }
   }
 }
