@@ -4,6 +4,7 @@ function CVObject(){
   this.strokeColor = null;
   this.fillColor = null;
   this.show = null;
+  this.glowColor = null;
 
   CVBaseObject.call(this);
 
@@ -78,6 +79,46 @@ function CVObject(){
   */
   this.getFillColor = function(){
     return this.fillColor;
+  }
+
+  /**
+  * Enable glowing
+  * @param enable
+  */
+  this.setGlowColor = function(color){
+    this.glowColor = color;
+  }
+
+  /**
+  * Get glowing state
+  * @return enableGlowing
+  */
+  this.getGlowColor = function(){
+    return this.glowColor;
+  }
+
+  /**
+  * Do things before drawing
+  */
+  this.preDraw = function(ctx){
+
+    // Apply glow effect if needed
+    if(this.glowColor != null){
+      ctx.shadowBlur = 10;
+      ctx.shadowColor = this.glowColor;
+    }
+  }
+
+  /**
+  * Do thigs after drawing
+  */
+  this.postDraw = function(ctx){
+
+    //Revert glowing effect
+    if(this.glowColor != null){
+      ctx.shadowBlur = 0;
+      ctx.shadowColor = null;
+    }
   }
 }
 

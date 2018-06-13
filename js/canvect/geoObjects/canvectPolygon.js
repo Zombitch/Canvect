@@ -70,6 +70,7 @@ function CVPolygon(){
   * @param ctx Canvas context
   */
   this.drawPartial = function(ctx){
+    this.preDraw(ctx);
     if(this.strokeColor != null){
       ctx.strokeStyle = this.strokeColor;
 
@@ -79,6 +80,7 @@ function CVPolygon(){
         ctx.strokeRect(this.points[0].getX(), this.points[0].getY(), 1, 1);
       }
     }
+    this.postDraw(ctx);
   }
 
   /**
@@ -86,6 +88,7 @@ function CVPolygon(){
   * @param ctx Canvas context
   */
   this.draw = function(ctx){
+    this.preDraw(ctx);
     if(this.strokeColor != null){
       ctx.strokeStyle = this.strokeColor;
       ctx.beginPath();
@@ -97,6 +100,7 @@ function CVPolygon(){
       if(this.closed) ctx.closePath();
       ctx.stroke();
     }
+    this.postDraw(ctx);
   }
 }
 

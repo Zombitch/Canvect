@@ -59,6 +59,9 @@
         <input placeholder="Object Color" id="objColor" type="text" class="white-text" value="#000000">
       </li>
       <li>
+        <input placeholder="Glow Color" id="glowColor" type="text" class="white-text">
+      </li>
+      <li>
         <select id="objType" class="white-text">
           <option value="" disabled selected>Object Type</option>
           <option class="red" value="2">Point</option>
@@ -76,7 +79,7 @@
         <input placeholder="Attributes" id="objAttributes" type="text" class="validate">
       </li>
       <li>
-        <a href="javascript:manager.createObject($('#objName').val(), $('#objType').val(), $('#objColor').val(), $('#objAttributes').val(), $('#objImage').val());" class="white-text"><i class="material-icons white-text">gesture</i>Start</a>
+        <a href="javascript:manager.createObject($('#objName').val(), $('#objType').val(), $('#objColor').val(), $('#glowColor').val(), $('#objAttributes').val(), $('#objImage').val());" class="white-text"><i class="material-icons white-text">gesture</i>Start</a>
       </li>
       <li>
         <a href="javascript:manager.closePolygonObject();" class="white-text"><i class="material-icons white-text">timeline</i>Finalize/Close Polygon</a>

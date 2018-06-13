@@ -49,7 +49,10 @@ function CVManagerEditor(){
   /**
   * Create the object that will be created
   */
-  this.createObject = function(objName, objType, objColor, attributes, imgFile){
+  this.createObject = function(objName, objType, objColor, glowColor, attributes, imgFile){
+    // Set glow color to null if it's empty
+    if(glowColor == "") glowColor = null;
+
     if(objType == CVObjectType.POINT()){
       this.object = new CVPoint();
     }else if(objType == CVObjectType.RECTANGLE()){
@@ -67,6 +70,7 @@ function CVManagerEditor(){
 
     this.object.init();
     this.object.setStrokeColor(objColor);
+    this.object.setGlowColor(glowColor);
     this.object.setName(objName);
 
     //Custom initialization

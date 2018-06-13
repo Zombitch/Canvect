@@ -125,6 +125,7 @@ function CVRectangle(){
   * @param ctx Canvas context
   */
   this.drawPartial = function(ctx){
+    this.preDraw(ctx);
     if(this.strokeColor != null){
       ctx.strokeStyle = this.strokeColor;
 
@@ -135,6 +136,7 @@ function CVRectangle(){
         ctx.strokeRect(this.x, this.y, this.width, this.height);
       }
     }
+    this.postDraw(ctx);
   }
 
   /**
@@ -142,10 +144,12 @@ function CVRectangle(){
   * @param ctx Canvas context
   */
   this.draw = function(ctx){
+    this.preDraw(ctx);
     if(this.strokeColor != null){
       ctx.strokeStyle = this.strokeColor;
       ctx.strokeRect(this.x, this.y, this.width, this.height);
     }
+    this.postDraw(ctx);
   }
 }
 
