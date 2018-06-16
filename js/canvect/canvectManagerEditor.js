@@ -50,8 +50,6 @@ function CVManagerEditor(){
   * Create the object that will be created
   */
   this.createObject = function(objName, objType, objStrokeColor, objFillColor, glowColor, attributes, imgFile){
-    // Set glow color to null if it's empty
-    if(glowColor == "") glowColor = null;
 
     if(objType == CVObjectType.POINT()){
       this.object = new CVPoint();
@@ -60,6 +58,7 @@ function CVManagerEditor(){
     }else if(objType == CVObjectType.TRIANGLE()){
       this.object = new CVTriangle();
     }else if(objType == CVObjectType.CIRCLE()){
+      this.object = new CVCircle();
     }else if(objType == CVObjectType.POLYGON()){
       this.object = new CVPolygon();
     }else if(objType == CVObjectType.OBJECT_LIST()){
@@ -71,7 +70,7 @@ function CVManagerEditor(){
     this.object.init();
     this.object.setStrokeColor(objStrokeColor);
     this.object.setFillColor(objFillColor);
-    this.object.setGlow(glowColor, 10);
+    if(glowColor != "") this.object.setGlow(glowColor, 10);
     this.object.setName(objName);
 
     //Custom initialization
@@ -139,8 +138,7 @@ function CVManagerEditor(){
     if(self.object != null && !evt.shiftKey){
       var tmpObjList = self.objectList.slice();
 
-      if(self.object.getType() == CVObjectType.POINT() ||
-         self.object.getType() == CVObjectType.IMAGE()){
+      if(self.object.getType() == CVObjectType.POINT() || self.object.getType() == CVObjectType.IMAGE()){
         self.object.setXY(x, y);
       }else if(self.object.getType() == CVObjectType.RECTANGLE()){
         if(self.object.getX() == null || self.object.getY() == null) self.object.setXY(x, y);
@@ -148,6 +146,8 @@ function CVManagerEditor(){
       }else if(self.object.getType() == CVObjectType.TRIANGLE()){
         self.object.addPoint(x, y);
       }else if(self.object.getType() == CVObjectType.CIRCLE()){
+        if(self.object.getX() == null || self.object.getY() == null) self.object.setXY(x, y);
+        else self.object.computeRadius(x, y);
       }else if(self.object.getType() == CVObjectType.POLYGON()){
         self.object.addPoint(x, y);
       }else if(self.object.getType() == CVObjectType.OBJECT_LIST()){

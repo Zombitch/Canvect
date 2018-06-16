@@ -123,6 +123,23 @@ function CVObject(){
   }
 
   /**
+  * Stroke and fill the path
+  * @param ctx Canvas context
+  */
+  this.applyColor = function(ctx){
+    if(this.strokeColor != null){
+      ctx.strokeStyle = this.strokeColor;
+      ctx.stroke();
+    }
+
+    if(this.fillColor != null){
+      ctx.fillStyle = this.fillColor;
+      if(this.glow.color != null) this.runGlowEffect(ctx);
+      ctx.fill();
+    }
+  }
+
+  /**
   * Clear some value before drawing
   * @param ctx Canvas context
   */

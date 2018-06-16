@@ -64,23 +64,6 @@ function CVPolygon(){
   }
 
   /**
-  * Stroke and fill the path
-  * @param ctx Canvas context
-  */
-  this.applyColor = function(ctx){
-    if(this.strokeColor != null){
-      ctx.strokeStyle = this.strokeColor;
-      ctx.stroke();
-    }
-
-    if(this.fillColor != null){
-      ctx.fillStyle = this.fillColor;
-      if(this.glow.color != null) this.runGlowEffect(ctx);
-      ctx.fill();
-    }
-  }
-
-  /**
   * Draw partial CVPolygon on the canvas.
   * This means the system will try to draw something with available data even if all data are not set.
   * For instance, if the polygon does not specify third point, then it will display a line.
