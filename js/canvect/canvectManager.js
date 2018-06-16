@@ -4,9 +4,11 @@ function CVManager(){
   this.clickMode = null;
   this.isMouseDown = null;
   this.objectList = null; //Contains all type of CVObject possible
+  this.backgroundColor = null;
 
   this.baseInit = function(engine){
     this.engine = engine;
+    this.objectList = new Array();
     this.isMouseDown = false;
     this.clickMode = CVManager.MODE_CLICK();
   }
@@ -173,6 +175,27 @@ function CVManager(){
   }
 
   /**
+  * Load JSON data file and draw it if needed
+  * @param file File input object
+  * @param shouldDraw Should system draw the all objets asap ?
+  */
+  this.loadDataFromDisk = function(e, shouldDraw){
+    var self = this;
+    var reader = new FileReader();
+    var file = e.target.files[0];
+
+    reader.onload = function(e) {
+      var contents = e.target.result;
+      var data = JSON.parse(contents);
+      data.forEach(function(item){
+        self.objectList.push(CVLoader.loadObject(item));
+      });
+      if(shouldDraw) self.draw(self.objectList);
+    };
+    reader.readAsText(file);
+  }
+
+  /**
   * Draw elements on canvas
   * @param objects The objects to draw in canvas
   */
@@ -182,7 +205,7 @@ function CVManager(){
     this.engine.getContext().resetTransform();
     this.engine.clearCanvas();
     this.engine.getContext().translate(translate.getX() + translateTmp.getX(), translate.getY() + translateTmp.getY());
-
+    if(this.backgroundColor != null) this.engine.fillCanvas(this.backgroundColor);
     this.engine.draw(objects, false);
   }
 

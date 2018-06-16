@@ -15,6 +15,23 @@ function CVPolygon(){
   }
 
   /**
+  * Load data from JSON
+  * @param data Json data
+  */
+  this.load = function(data){
+    var self = this;
+    Object.keys(data).forEach(function (key) {
+      if(key == "points"){
+        data[key].forEach(function(pointData){
+          self.addPoint(pointData.x, pointData.y);
+        });
+      }else{
+        self[key] = data[key];
+      }
+    });
+  }
+
+  /**
   * Set closed attributes that determine if the polygon is closed or not
   * @param closed
   */

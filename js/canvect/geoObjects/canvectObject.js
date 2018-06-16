@@ -23,6 +23,17 @@ function CVObject(){
   }
 
   /**
+  * Load data from JSON
+  * @param data Json data
+  */
+  this.load = function(data){
+    var self = this;
+    Object.keys(data).forEach(function (key) {
+      self[key] = data[key];
+    });
+  }
+
+  /**
   * Set object name
   * @param name
   */

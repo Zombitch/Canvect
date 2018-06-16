@@ -63,4 +63,8 @@ function initListeners(){
       $("#objImageContainer").addClass("hide");
     }
   });
+
+  $("#dataFileInput").change(function(e){
+    manager.loadDataFromDisk(e, true);
+  });
 }

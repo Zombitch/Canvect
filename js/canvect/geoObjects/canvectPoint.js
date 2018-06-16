@@ -75,7 +75,6 @@ function CVPoint(){
   this.drawPartial = function(ctx){
     this.preDraw(ctx);
     this.draw(ctx);
-    this.postDraw(ctx);
   }
 
   /**
@@ -88,7 +87,6 @@ function CVPoint(){
       ctx.strokeStyle = this.strokeColor;
       ctx.strokeRect(this.x, this.y, 1, 1);
     }
-    this.postDraw(ctx);
   }
 }
 

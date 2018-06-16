@@ -83,9 +83,10 @@ function CVEngine(){
   this.draw = function(objList, drawPartial){
     for (var idx = 0; idx < objList.length; idx++) {
       var obj = objList[idx];
-
-      if(drawPartial) obj.drawPartial(this.context);
-      else obj.draw(this.context);
+      if(obj != null){
+        if(drawPartial) obj.drawPartial(this.context);
+        else obj.draw(this.context);
+      }
     }
   }
 }

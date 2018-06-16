@@ -12,7 +12,6 @@ function CVManagerEditor(){
   */
   this.init = function(engine){
     this.baseInit(engine);
-    this.objectList = new Array();
     this.engine = engine;
   }
 
@@ -124,7 +123,7 @@ function CVManagerEditor(){
     this.engine.clearCanvas();
     this.engine.getContext().translate(translate.getX() + translateTmp.getX(), translate.getY() + translateTmp.getY());
 
-    if(this.debugFillColor != null) this.canvasFillColor(this.debugFillColor);
+    if(this.backgroundColor != null) this.canvasFillColor(this.backgroundColor);
     if(this.debugStrokeColor != null) this.canvasStrokeColor(this.debugStrokeColor);
     this.engine.draw(objects, true);
   }

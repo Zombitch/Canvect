@@ -22,6 +22,7 @@
   <script type="text/javascript" src="../js/canvect/geoObjects/canvectCircle.js"></script>
   <script type="text/javascript" src="../js/canvect/geoObjects/canvectImage.js"></script>
   <script type="text/javascript" src="../js/canvect/geoObjects/canvectObjectList.js"></script>
+  <script type="text/javascript" src="../js/canvect/geoObjects/canvectLoader.js"></script>
   <script type="text/javascript" src="../js/canvect/geoTransform/canvectTransformPoint.js"></script>
   <script type="text/javascript" src="../js/canvect/geoTransform/canvectTransformFactor.js"></script>
   <script type="text/javascript" src="../js/canvect/canvectEngine.js"></script>
@@ -42,6 +43,8 @@
         <div class="nav-wrapper blue darken-2">
           <ul class="right">
             <li><a href="javascript:manager.clearCanvas();"><i class="material-icons">insert_drive_file</i></a></li>
+            <li><a onclick="javascript:$('#dataFileInput').click()"><i class="material-icons">file_upload</i></a></li>
+            <li class="hide"><input type="file" id="dataFileInput"/></li>
             <li><a href="javascript:manager.downloadData();"><i class="material-icons">save</i></a></li>
             <li><a href="javascript:showObjectList();" class="white-text"><i class="material-icons white-text">format_list_bulleted</i></a></li>
           </ul>

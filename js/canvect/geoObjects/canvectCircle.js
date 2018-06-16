@@ -12,6 +12,14 @@ function CVCircle(){
   }
 
   /**
+  * Set radius xValue
+  * @param rad Radius to apply
+  */
+  this.setRadius = function(rad){
+    this.radius = rad;
+  }
+
+  /**
   * Compute computeRadius
   * @param x X coordinate value
   * @param x Y coordinate value
@@ -33,7 +41,7 @@ function CVCircle(){
 
     if(this.radius == null){
       ctx.strokeRect(this.x, this.y, 1, 1);
-    }else{console.log("full");
+    }else{
       this.draw(ctx);
     }
   }
