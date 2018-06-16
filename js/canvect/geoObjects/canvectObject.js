@@ -4,7 +4,7 @@ function CVObject(){
   this.strokeColor = null;
   this.fillColor = null;
   this.show = null;
-  this.glowColor = null;
+  this.glow = null;
 
   CVBaseObject.call(this);
 
@@ -15,6 +15,11 @@ function CVObject(){
     this.attributes = Object.create(null);
     this.type = CVObjectType.OBJECT();
     this.show = true;
+    this.glow = {
+      color:null,
+      intensity:0,
+      maxIntensity:0
+    };
   }
 
   /**
@@ -85,40 +90,45 @@ function CVObject(){
   * Enable glowing
   * @param enable
   */
-  this.setGlowColor = function(color){
-    this.glowColor = color;
+  this.setGlow = function(color, intensityValue){
+    this.glow = {
+      color:color,
+      intensity:intensityValue,
+      maxIntensity:intensityValue,
+      factor : 1
+    };
   }
 
   /**
   * Get glowing state
   * @return enableGlowing
   */
-  this.getGlowColor = function(){
-    return this.glowColor;
+  this.getGlow = function(){
+    return this.glow;
   }
 
   /**
-  * Do things before drawing
+  * Run glow effect system
+  * @param ctx Canvas context
+  */
+  this.runGlowEffect = function(ctx){
+    ctx.shadowBlur = this.glow.intensity;
+    ctx.shadowColor = this.glow.color;
+
+    this.glow.intensity -= this.glow.factor;
+
+    if(this.glow.intensity == 0 || this.glow.intensity == this.glow.maxIntensity){
+      this.glow.factor *= -1;
+    }
+  }
+
+  /**
+  * Clear some value before drawing
+  * @param ctx Canvas context
   */
   this.preDraw = function(ctx){
-
-    // Apply glow effect if needed
-    if(this.glowColor != null){
-      ctx.shadowBlur = 10;
-      ctx.shadowColor = this.glowColor;
-    }
-  }
-
-  /**
-  * Do thigs after drawing
-  */
-  this.postDraw = function(ctx){
-
-    //Revert glowing effect
-    if(this.glowColor != null){
-      ctx.shadowBlur = 0;
-      ctx.shadowColor = null;
-    }
+    ctx.shadowBlur = null;
+    ctx.shadowColor = null;
   }
 }
 

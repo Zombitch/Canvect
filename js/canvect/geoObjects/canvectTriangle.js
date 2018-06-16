@@ -36,7 +36,6 @@ function CVTriangle(){
   * @param ctx Canvas context
   */
   this.drawPartial = function(ctx){
-    this.preDraw(ctx);
     if(this.strokeColor != null){
       ctx.strokeStyle = this.strokeColor;
 
@@ -51,7 +50,6 @@ function CVTriangle(){
         ctx.strokeRect(this.points[0].getX(), this.points[0].getY(), 1, 1);
       }
     }
-    this.postDraw(ctx);
   }
 
   /**
@@ -59,17 +57,14 @@ function CVTriangle(){
   * @param ctx Canvas context
   */
   this.draw = function(ctx){
-    this.preDraw(ctx);
-    if(this.strokeColor != null){
-      ctx.strokeStyle = this.strokeColor;
-      ctx.beginPath();
-      ctx.moveTo(this.points[0].getX(), this.points[0].getY());
-      ctx.lineTo(this.points[1].getX(), this.points[1].getY());
-      ctx.lineTo(this.points[2].getX(), this.points[2].getY());
-      ctx.closePath();
-      ctx.stroke();
-    }
-    this.postDraw(ctx);
+    ctx.beginPath();
+    ctx.moveTo(this.points[0].getX(), this.points[0].getY());
+    ctx.lineTo(this.points[1].getX(), this.points[1].getY());
+    ctx.lineTo(this.points[2].getX(), this.points[2].getY());
+    ctx.closePath();
+
+    //Stroke and fill the path
+    this.applyColor(ctx);
   }
 }
 

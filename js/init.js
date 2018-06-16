@@ -24,6 +24,12 @@ function runEngine(){
   manager.addOnMouseUpEvent(manager.mouseUpEvent);
   manager.addOnClickEvent(manager.clickEvent);
   manager.addOnMouseMouveEvent(manager.mouseMoveEvent);
+
+  setInterval(function(){
+    var tmpObjList = manager.getObjectList().slice();
+    tmpObjList.push(manager.getObject());
+    manager.draw(tmpObjList);
+  }, 100);
 }
 
 /**

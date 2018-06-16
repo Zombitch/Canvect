@@ -49,7 +49,7 @@ function CVManagerEditor(){
   /**
   * Create the object that will be created
   */
-  this.createObject = function(objName, objType, objColor, glowColor, attributes, imgFile){
+  this.createObject = function(objName, objType, objStrokeColor, objFillColor, glowColor, attributes, imgFile){
     // Set glow color to null if it's empty
     if(glowColor == "") glowColor = null;
 
@@ -69,8 +69,9 @@ function CVManagerEditor(){
     }
 
     this.object.init();
-    this.object.setStrokeColor(objColor);
-    this.object.setGlowColor(glowColor);
+    this.object.setStrokeColor(objStrokeColor);
+    this.object.setFillColor(objFillColor);
+    this.object.setGlow(glowColor, 10);
     this.object.setName(objName);
 
     //Custom initialization

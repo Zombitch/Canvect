@@ -126,6 +126,7 @@ function CVRectangle(){
   */
   this.drawPartial = function(ctx){
     this.preDraw(ctx);
+
     if(this.strokeColor != null){
       ctx.strokeStyle = this.strokeColor;
 
@@ -136,7 +137,12 @@ function CVRectangle(){
         ctx.strokeRect(this.x, this.y, this.width, this.height);
       }
     }
-    this.postDraw(ctx);
+
+    if(this.fillColor != null){
+      ctx.fillStyle = this.fillColor;
+      if(this.glow.color != null) this.runGlowEffect(ctx);
+      ctx.fillRect(this.x, this.y, this.width, this.height);
+    }
   }
 
   /**
@@ -145,11 +151,17 @@ function CVRectangle(){
   */
   this.draw = function(ctx){
     this.preDraw(ctx);
+
     if(this.strokeColor != null){
       ctx.strokeStyle = this.strokeColor;
       ctx.strokeRect(this.x, this.y, this.width, this.height);
     }
-    this.postDraw(ctx);
+
+    if(this.fillColor != null){
+      ctx.fillStyle = this.fillColor;
+      if(this.glow.color != null) this.runGlowEffect(ctx);
+      ctx.fillRect(this.x, this.y, this.width, this.height);
+    }
   }
 }
 

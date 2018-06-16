@@ -64,6 +64,23 @@ function CVPolygon(){
   }
 
   /**
+  * Stroke and fill the path
+  * @param ctx Canvas context
+  */
+  this.applyColor = function(ctx){
+    if(this.strokeColor != null){
+      ctx.strokeStyle = this.strokeColor;
+      ctx.stroke();
+    }
+
+    if(this.fillColor != null){
+      ctx.fillStyle = this.fillColor;
+      if(this.glow.color != null) this.runGlowEffect(ctx);
+      ctx.fill();
+    }
+  }
+
+  /**
   * Draw partial CVPolygon on the canvas.
   * This means the system will try to draw something with available data even if all data are not set.
   * For instance, if the polygon does not specify third point, then it will display a line.
@@ -80,7 +97,6 @@ function CVPolygon(){
         ctx.strokeRect(this.points[0].getX(), this.points[0].getY(), 1, 1);
       }
     }
-    this.postDraw(ctx);
   }
 
   /**
@@ -89,18 +105,17 @@ function CVPolygon(){
   */
   this.draw = function(ctx){
     this.preDraw(ctx);
-    if(this.strokeColor != null){
-      ctx.strokeStyle = this.strokeColor;
-      ctx.beginPath();
-      ctx.moveTo(this.points[0].getX(), this.points[0].getY());
-      for(var idx = 1; idx < this.points.length; idx++){
-        ctx.lineTo(this.points[idx].getX(), this.points[idx].getY());
-      }
 
-      if(this.closed) ctx.closePath();
-      ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(this.points[0].getX(), this.points[0].getY());
+    for(var idx = 1; idx < this.points.length; idx++){
+      ctx.lineTo(this.points[idx].getX(), this.points[idx].getY());
     }
-    this.postDraw(ctx);
+
+    if(this.closed) ctx.closePath();
+
+    //Stroke and fill the path
+    this.applyColor(ctx);
   }
 }
 

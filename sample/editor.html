@@ -56,7 +56,10 @@
         <input placeholder="Object Name" id="objName" type="text" class="white-text">
       </li>
       <li>
-        <input placeholder="Object Color" id="objColor" type="text" class="white-text" value="#000000">
+        <input placeholder="Object Stroke Color" id="objStrokeColor" type="text" class="white-text" value="#000000">
+      </li>
+      <li>
+        <input placeholder="Object Color" id="objFillColor" type="text" class="white-text" value="#FFFFFF">
       </li>
       <li>
         <input placeholder="Glow Color" id="glowColor" type="text" class="white-text">
@@ -79,7 +82,7 @@
         <input placeholder="Attributes" id="objAttributes" type="text" class="validate">
       </li>
       <li>
-        <a href="javascript:manager.createObject($('#objName').val(), $('#objType').val(), $('#objColor').val(), $('#glowColor').val(), $('#objAttributes').val(), $('#objImage').val());" class="white-text"><i class="material-icons white-text">gesture</i>Start</a>
+        <a href="javascript:manager.createObject($('#objName').val(), $('#objType').val(), $('#objStrokeColor').val(), $('#objFillColor').val(), $('#glowColor').val(), $('#objAttributes').val(), $('#objImage').val());" class="white-text"><i class="material-icons white-text">gesture</i>Start</a>
       </li>
       <li>
         <a href="javascript:manager.closePolygonObject();" class="white-text"><i class="material-icons white-text">timeline</i>Finalize/Close Polygon</a>
