@@ -126,7 +126,7 @@ function CVRectangle(){
   */
   this.drawPartial = function(ctx){
     this.preDraw(ctx);
-    
+
     if(this.fillColor != null){
       ctx.fillStyle = this.fillColor;
       if(this.glow.color != null) this.runGlowEffect(ctx);
@@ -135,6 +135,7 @@ function CVRectangle(){
 
     if(this.strokeColor != null){
       ctx.strokeStyle = this.strokeColor;
+      ctx.lineWidth = this.lineWidth;
 
       //If no width or no height then just draw point
       if(this.width == null || this.height == null){
@@ -154,6 +155,7 @@ function CVRectangle(){
 
     if(this.strokeColor != null){
       ctx.strokeStyle = this.strokeColor;
+      ctx.lineWidth = this.lineWidth;
       ctx.strokeRect(this.x, this.y, this.width, this.height);
     }
 

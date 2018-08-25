@@ -3,6 +3,7 @@ function CVObject(){
   this.name = null;
   this.strokeColor = null;
   this.fillColor = null;
+  this.lineWidth = null
   this.show = null;
   this.glow = null;
 
@@ -15,6 +16,7 @@ function CVObject(){
     this.attributes = Object.create(null);
     this.type = CVObjectType.OBJECT();
     this.show = true;
+    this.lineWidth = 1;
     this.glow = {
       color:null,
       intensity:0,
@@ -31,6 +33,21 @@ function CVObject(){
     Object.keys(data).forEach(function (key) {
       self[key] = data[key];
     });
+  }
+
+  /**
+  * Set line width
+  * @param width
+  */
+  this.setLineWidth = function(width){
+    this.lineWidth = width;
+  }
+
+  /**
+  * Return line width
+  */
+  this.getLineWidth = function(){
+    return this.lineWidth;
   }
 
   /**
