@@ -46,6 +46,17 @@ function CVManager(){
   }
 
   /**
+  * Compute coordinate based on touch position
+  */
+  this.computeTouchCoordinates = function(evt){
+    var touches = evt.changedTouches;
+    var rect = this.engine.getCanvas().getBoundingClientRect();
+    var xValue = Math.round(touches[0].pageX - rect.left) - this.engine.getTranslateFactor().getValue().getX();
+    var yValue = Math.round(touches[0].pageY - rect.top) - this.engine.getTranslateFactor().getValue().getY();
+    return {x: xValue, y : yValue};
+  }
+
+  /**
   * Display coordinate where is located the mouse on the canvas on the designated html element
   * @param htmlElement Html Element in which we should display the coordinates
   */
@@ -121,6 +132,34 @@ function CVManager(){
     if(callback !== undefined){
       this.engine.getCanvas().addEventListener("mousemove", function(evt) {
         var coords = self.computeCoordinates(evt);
+        callback(coords.x, coords.y, evt);
+      }, false);
+    }
+  }
+
+  /**
+  * Manage on touch start on canvas
+  * @param callback Callback called when mouse mouve is performed
+  */
+  this.addOnTouchStartEvent = function(callback){
+    if(callback !== undefined){
+      this.engine.getCanvas().addEventListener("touchstart", function(evt) {
+        evt.preventDefault();
+        var coords = self.computeTouchCoordinates(evt);
+        callback(coords.x, coords.y, evt);
+      }, false);
+    }
+  }
+
+  /**
+  * Manage on touch end event on canvas
+  * @param callback Callback called when mouse mouve is performed
+  */
+  this.addOnTouchEndEvent = function(callback){
+    if(callback !== undefined){
+      this.engine.getCanvas().addEventListener("touchend", function(evt) {
+        evt.preventDefault();
+        var coords = self.computeTouchCoordinates(evt);
         callback(coords.x, coords.y, evt);
       }, false);
     }

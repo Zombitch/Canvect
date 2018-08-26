@@ -119,6 +119,8 @@ function CVSprite(){
         if(this.y > this.aimingLocation.y) this.y--;
         else if(this.y < this.aimingLocation.y) this.y++;
         if(Math.round(this.y) == Math.round(this.aimingLocation.y) && Math.round(this.x) == Math.round(this.aimingLocation.x)){
+          this.y = this.aimingLocation.y;
+          this.x = this.aimingLocation.x;
           this.animate = false;
           this.currentFrame = 0;
         }
