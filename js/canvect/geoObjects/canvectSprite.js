@@ -6,6 +6,8 @@ function CVSprite(){
   this.frameSpeed = null;
   this.direction = null;
   this.animate = null;
+  this.aimingLocation = null; //Where the sprite should be placed / moved
+  this.imageScaling = null;
 
   CVImage.call(this);
 
@@ -20,6 +22,8 @@ function CVSprite(){
     this.direction = 0;
     this.frameSpeed = 1;
     this.animate = false;
+    this.aimingLocation = {x:0, y:0};
+    this.imageScaling = {x:1, y:1};
   }
 
   /**
@@ -32,8 +36,24 @@ function CVSprite(){
   /**
   * Set sprite direction (in fact it means select the line we will display)
   */
-  this.setLineSize = function(size){
-    this.lineSize = size;
+  this.setDirection = function(dir){
+    this.direction = dir;
+  }
+
+  /**
+  * Scale the image if needed
+  */
+  this.setImageScaling = function(x, y){
+    this.imageScaling.x = x;
+    this.imageScaling.y = y;
+  }
+
+  /**
+  * Set sprite aiming location
+  */
+  this.setAimingLocation = function(x, y){
+    this.aimingLocation.x = x;
+    this.aimingLocation.y = y;
   }
 
   /**
@@ -88,11 +108,20 @@ function CVSprite(){
     if(this.isImageLoaded == true){
       var spriteElementWidth = (this.image.width / this.columnSize);
       var spriteElementHeight = (this.image.height / this.lineSize);
-      ctx.drawImage(this.image, (this.currentFrame*spriteElementWidth), (this.direction*spriteElementHeight), spriteElementWidth, spriteElementHeight, this.x, this.y, spriteElementWidth, spriteElementHeight);
+      ctx.drawImage(this.image, (this.currentFrame*spriteElementWidth), (this.direction*spriteElementHeight), spriteElementWidth, spriteElementHeight, this.x, this.y, spriteElementWidth*this.imageScaling.x, spriteElementHeight*this.imageScaling.y);
 
       if(this.animate){
         this.currentFrame += this.frameSpeed;
         if(this.currentFrame >= this.columnSize) this.currentFrame = 0;
+
+        if(this.x > this.aimingLocation.x) this.x--;
+        else if(this.x < this.aimingLocation.x) this.x++;
+        if(this.y > this.aimingLocation.y) this.y--;
+        else if(this.y < this.aimingLocation.y) this.y++;
+        if(Math.round(this.y) == Math.round(this.aimingLocation.y) && Math.round(this.x) == Math.round(this.aimingLocation.x)){
+          this.animate = false;
+          this.currentFrame = 0;
+        }
       }
     }
   }
@@ -107,6 +136,16 @@ function CVSprite(){
       var spriteElementHeight = (this.image.height / this.lineSize);
       ctx.drawImage(this.image, columnNumber*spriteElementWidth, lineNumber*spriteElementHeight, spriteElementWidth, spriteElementHeight, this.x, this.y, spriteElementWidth, spriteElementHeight);
     }
+  }
+
+  /**
+  * Move the sprite to indicated coordinates
+  */
+  this.moveTo = function(x, y){
+    this.aimingLocation.x = x;
+    this.aimingLocation.y = y;
+    this.currentFrame = 0;
+    this.animate = true;
   }
 }
 
